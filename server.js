@@ -4,14 +4,14 @@ const mysql = require('mysql');
 
 const connection = mysql.createConnection({
   host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'classlist_db'
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: 'employees_db'
 });
 
 connection.connect((err) => {
     if (err) throw err;
-    console.log('Connected to the database');
+    console.log('Connected to the employee database');
   });
   
   module.exports = connection;
