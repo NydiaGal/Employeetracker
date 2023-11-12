@@ -43,7 +43,6 @@ The following video shows an example of the application being used from the comm
 
 [![A video thumbnail shows the command-line employee management application with a play button overlaying the view.](./Assets/12-sql-homework-video-thumbnail.png)](https://2u-20.wistia.com/medias/2lnle7xnpk)
 
-## Getting Started
 
 **Important**: You will be committing a file that contains your database credentials. Make sure that your MySQL password is not used for any other personal accounts, because it will be visible on GitHub. In upcoming lessons, you will learn how to better secure this password, or you can start researching npm packages now that could help you.
 
@@ -174,10 +173,6 @@ You are required to submit BOTH of the following for review:
 * A walkthrough video demonstrating the functionality of the application.
 
 * The URL of the GitHub repository, with a unique name and a README describing the project.
-
-- - -
-© 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
-
 
 
 User Stories
