@@ -1,3 +1,9 @@
+DROP DATABASE IF EXISTS sample_employee_db;
+
+CREATE DATABASE sample_employee_db;
+
+USE sample_employee_db;
+
 CREATE TABLE employees (
     employee_id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
