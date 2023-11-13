@@ -2,6 +2,8 @@ const inquirer = require('inquirer');
 const mysql = require('mysql');
 require('dotenv').config();
 
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 const connection = mysql.createConnection({
   host: 'localhost',
@@ -16,6 +18,70 @@ connection.connect((err) => {
   });
   
   module.exports = connection;
+
+
+app.get ('/api/roles',(req, res) => {
+
+});
+
+app.get ('/api/departments',(req, res) => {
+
+});
+
+app.get ('/api/employees',(req, res) => {
+
+});
+
+app.post ('/api/employees',(req, res) => {
+
+});
+
+app.post ('/api/role',(req, res) => {
+
+});
+
+app.post ('/api/departments',(req, res) => {
+
+});
+
+app.put ('/api/roles',(req, res) => {
+
+});
+
+app.put ('/api/departments',(req, res) => {
+
+});
+
+app.put ('/api/employee',(req, res) => {
+
+});
+
+db.query(`DELETE FROM course_names WHERE id = ?`, 3, (err, result) => {
+    if (err) {
+      console.log(err);
+    }
+    console.log(result);
+  });
+  // Default response for any other request (Not Found)
+  app.use((req, res) => {
+    res.status(404).end();
+  });
+
+
+    
+  // Query database
+  db.query('SELECT * FROM course_names', function (err, results) {
+    console.log(results);
+  });
+
+  db.query(`DELETE FROM course_names WHERE id = ?`, 3, (err, result) => {
+    if (err) {
+      console.log(err);
+    }
+    console.log(result);
+  });
+
+
 
 function employeeMenu() {
   inquirer
