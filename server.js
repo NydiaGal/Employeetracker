@@ -14,29 +14,44 @@ const connection = mysql.createConnection({
 
 connection.connect((err) => {
     if (err) throw err;
-    console.log('Connected to the employee database');
+    console.log('You are connected to the employee database.');
   });
   
   module.exports = connection;
 
 
 app.get ('/api/roles',(req, res) => {
-
+  db.query('SELECT * FROM roles', function (err, results) {
+    if (err) {
+      res.status(500).json({message: 'Not functioning as intended'});
+    }
+    res.status(200).json(results);
+  });
 });
 
 app.get ('/api/departments',(req, res) => {
-
+  db.query('SELECT * FROM departments', function (err, results) {
+    if (err) {
+      res.status(500).json({message: 'Not functioning as intended'});
+    }
+    res.status(200).json(results);
+  });
 });
 
 app.get ('/api/employees',(req, res) => {
-
+  db.query('SELECT * FROM employees', function (err, results) {
+    if (err) {
+      res.status(500).json({message: 'Not functioning as intended'});
+    }
+    res.status(200).json(results);
+  });
 });
 
 app.post ('/api/employees',(req, res) => {
 
 });
 
-app.post ('/api/role',(req, res) => {
+app.post ('/api/roles',(req, res) => {
 
 });
 
@@ -52,7 +67,7 @@ app.put ('/api/departments',(req, res) => {
 
 });
 
-app.put ('/api/employee',(req, res) => {
+app.put ('/api/employee/id:',(req, res) => {
 
 });
 
@@ -72,13 +87,6 @@ db.query(`DELETE FROM course_names WHERE id = ?`, 3, (err, result) => {
   // Query database
   db.query('SELECT * FROM course_names', function (err, results) {
     console.log(results);
-  });
-
-  db.query(`DELETE FROM course_names WHERE id = ?`, 3, (err, result) => {
-    if (err) {
-      console.log(err);
-    }
-    console.log(result);
   });
 
 
