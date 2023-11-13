@@ -1,6 +1,9 @@
 const inquirer = require('inquirer');
 const mysql = require('mysql');
 require('dotenv').config();
+ 
+const PORT = 3001;
+const app = express();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -16,9 +19,6 @@ connection.connect((err) => {
     if (err) throw err;
     console.log('You are connected to the employee database.');
   });
-  
-  module.exports = connection;
-
 
 app.get ('/api/roles',(req, res) => {
   db.query('SELECT * FROM roles', function (err, results) {
@@ -30,7 +30,7 @@ app.get ('/api/roles',(req, res) => {
 });
 
 app.get ('/api/departments',(req, res) => {
-  db.query('SELECT * FROM departments', function (err, results) {
+  db.query("SELECT * FROM departments", function (err, results) {
     if (err) {
       res.status(500).json({message: 'Not functioning as intended'});
     }
@@ -39,7 +39,7 @@ app.get ('/api/departments',(req, res) => {
 });
 
 app.get ('/api/employees',(req, res) => {
-  db.query('SELECT * FROM employees', function (err, results) {
+  db.query("SELECT * FROM employees", function (err, results) {
     if (err) {
       res.status(500).json({message: 'Not functioning as intended'});
     }
@@ -48,47 +48,62 @@ app.get ('/api/employees',(req, res) => {
 });
 
 app.post ('/api/employees',(req, res) => {
-
+  db.query("INSERT INTO employees (employee_ID) VALUES (?)", req.body.employee_ID, (err, results) => {
+    if (err) {
+      res.status(400).json({message: 'Incorrect data was entered. Please try again.'});
+    }
+    res.status(201).json(results);
+  });
 });
 
 app.post ('/api/roles',(req, res) => {
-
-});
+  db.query("INSERT INTO roles (role_ID) VALUES (?)", req.body.roles_ID, (err, results) => {
+    if (err) {
+      res.status(400).json({message: 'Incorrect data was entered. Please try again.'});
+      }
+      res.status(201).json(results);
+    });
+  });
 
 app.post ('/api/departments',(req, res) => {
-
+  db.query("INSERT INTO departments (department_name) VALUES (?)", req.body.department_name, (err, results) => {
+    if (err) {
+      res.status(400).json({message: 'Incorrect data was entered. Please try again.'});
+    }
+    res.status(201).json(results);
+  });
 });
 
 app.put ('/api/roles',(req, res) => {
-
+  db.query("UPDATE roles SET role = ?", req.body.roles_ID, (err, results) => {
+    if (err) {
+      res.status(500).json({message: 'Incorrect data was entered. Please try again.'});
+    }
+    res.status(200).json(results);
+  });
 });
 
 app.put ('/api/departments',(req, res) => {
-
+  db.query("UPDATE departments SET department = ?", req.body.department_name, (err, results) => {
+    if (err) {
+      res.status(500).json({message: 'Incorrect data was entered. Please try again.'});
+    }
+    res.status(200).json(results);
+  });
 });
 
 app.put ('/api/employee/id:',(req, res) => {
-
+  db.query("UPDATE employees SET employee = ? WHERE employee_id = ?", [req.body.employee, req.params.id], (err, results) =>  {
+    if (err) {
+      res.status(500).json({message: 'Incorrect data was entered. Please try again.'});
+    }
+    res.status(204).json(results);
+  });
 });
 
-db.query(`DELETE FROM course_names WHERE id = ?`, 3, (err, result) => {
-    if (err) {
-      console.log(err);
-    }
-    console.log(result);
+app.use((req, res) => {
+  res.status(404).end();
   });
-  // Default response for any other request (Not Found)
-  app.use((req, res) => {
-    res.status(404).end();
-  });
-
-
-    
-  // Query database
-  db.query('SELECT * FROM course_names', function (err, results) {
-    console.log(results);
-  });
-
 
 
 function employeeMenu() {
@@ -133,6 +148,5 @@ function employeeMenu() {
       }
     });
 }
-
 
 employeeMenu();
