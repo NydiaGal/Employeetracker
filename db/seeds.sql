@@ -11,5 +11,5 @@ INSERT INTO roles (title, department_id, salary) VALUES
     ('Network Operations Manager', 4, 55000.00);
 
 INSERT INTO employees (first_name, last_name, role_id, manager_id, hire_date) VALUES
-    ('Juan', 'Million', 1, NULL, '1999-12-31'),
+    ('Juan', 'Million', 1, 3, '1999-12-31'),
     ('Juana', 'Million', 3, 2, '1999-12-20');
